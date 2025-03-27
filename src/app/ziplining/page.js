@@ -1,9 +1,10 @@
 'use client';
 import Image from "next/image";
-import { PlayCircle } from "lucide-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion } from "framer-motion";
 import Header from "../components/navbar";
+import { usePathname } from "next/navigation";
+import Head from 'next/head';
 
 
 const activities = [
@@ -29,20 +30,32 @@ const activities = [
   },
 ];
 
+
 export default function Ziplining() {
+  const pathname = usePathname(); // Get current URL path
+const isHomePage = pathname === "/"; 
+const whatsappNumber = "9817404544";
+const message = encodeURIComponent("Hello, I am interested in your services.");
   return (
-    <div className="min-h-screen bg-transparent text-white p-2 md:p-4 bg-gradient-to-r from-[#1B3B37] to-[#32645A]">
-       <div className="absolute inset-0">
-          <Image
-            src="/images/ziplinebg.webp"
-            alt="zipline in Khajjiar,Dalhousie,Chamba"
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-      <Header/>
-      <h1 className="text-4xl font-bold text-center mb-8">Ziplining</h1>      
-    
+    <>
+      <Head>
+        <title>Ziplining Adventure | Explore Thrills in Khajjiar</title>
+        <meta name="description" content="Experience an adrenaline rush with our ziplining adventure in Khajjiar, Dalhousie. Safe, affordable, and guided by professionals!" />
+        <meta name="keywords" content="ziplining, adventure, Dalhousie, Khajjiar, outdoor activities, thrill, travel" />
+        <meta name="author" content="Adventures Heaven" />
+        <meta property="og:title" content="Ziplining Adventure in Khajjiar" />
+        <meta property="og:description" content="Enjoy an exciting ziplining experience in the scenic landscapes of Khajjiar, Dalhousie." />
+        <meta property="og:image" content="/images/zipline1.webp" />
+        <meta property="og:type" content="website" />
+      </Head>
+    <div className="min-h-screen bg-transparent text-white  bg-gradient-to-r from-[#1B3B37] to-[#32645A]">
+  
+        <div
+        className="min-h-screen inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/ziplinebg.webp')" }}
+      >
+    {!isHomePage && <Header />}
+      <h1 className="text-5xl text-blue-500 font-bold text-center font-serif p-5 mb-8">Ziplining</h1> 
       {/* Grid Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
         <div className="md:row-span-2 relative group overflow-hidden rounded-lg shadow-md">
@@ -74,7 +87,7 @@ export default function Ziplining() {
           </div>
         ))}
       </div>
-
+</div>
    {/* Experience Section */}
    <motion.div 
       className="mt-12 text-center max-w-4xl mx-auto p-6"
@@ -111,10 +124,13 @@ export default function Ziplining() {
 
         </div>
 
-        {/* Call to Action Button */}
-        <button className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 transition-all">
-          Start Your Explore
-        </button>
+        <button
+  className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 transition-all"
+  onClick={() => window.open("https://wa.me/9817404544?text=Hello%2C%20I%20am%20interested%20in%20your%20services", "_blank")}
+>
+  Start Your Explore
+</button>
+
       </motion.div>
 
       {/* Right Section - Image with Floating User Reviews */}
@@ -141,16 +157,17 @@ export default function Ziplining() {
  
 
       {/* Call to Action */}
-      <motion.button 
-        className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg transition-transform transform hover:scale-105"
-        whileHover={{ scale: 1.1 }}
-      >
-        Book Your Adventure Now 🚀
-      </motion.button>
+      <motion.button
+      className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg transition-transform transform hover:scale-105"
+      whileHover={{ scale: 1.1 }}
+      onClick={() => window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")}
+    >
+      Book Your Adventure Now
+    </motion.button>
     </motion.div>
       
       </div>
-
+</>
   );
 }
 

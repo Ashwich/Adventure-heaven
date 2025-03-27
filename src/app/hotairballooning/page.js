@@ -4,6 +4,8 @@ import { PlayCircle } from "lucide-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion } from "framer-motion";
 import Header from "../components/navbar";
+import { usePathname } from "next/navigation";
+import Head from "next/head";
 
 
 const activities = [
@@ -30,11 +32,71 @@ const activities = [
 ];
 
 export default function HotAirBallooning() {
+  const pathname = usePathname(); // Get current URL path
+  const isHomePage = pathname === "/"; 
+  const whatsappNumber = "9817404544";
+const message = encodeURIComponent("Hello, I am interested in your services.");
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 to-blue-300 text-white p-4 md:p-8">
-      <Header/>
-      <h1 className="text-4xl font-bold text-center mb-8">Hot Air Balloons</h1>      
-    
+        <Head>
+        <title>Hot Air Ballooning in Khajjiar | Adventure in Dalhousie, Chamba</title>
+        <meta
+          name="description"
+          content="Experience breathtaking hot air ballooning in Khajjiar, Dalhousie. Book your adventure now for a thrilling ride over scenic landscapes."
+        />
+        <meta
+          name="keywords"
+          content="hot air ballooning, Khajjiar, Dalhousie adventure, Chamba tourism, travel in Himachal, paragliding, aerial tours"
+        />
+        <meta name="author" content="Adventures Heaven" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph for Social Sharing */}
+        <meta property="og:title" content="Hot Air Ballooning in Khajjiar | Adventure in Dalhousie, Chamba" />
+        <meta
+          property="og:description"
+          content="Explore thrilling hot air balloon rides in Khajjiar, Dalhousie. Experience breathtaking views over Chamba's scenic landscapes."
+        />
+        <meta property="og:image" content="/images/hotairballon.jpg" />
+        <meta property="og:url" content="https://yourwebsite.com/hot-air-ballooning" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Hot Air Ballooning in Khajjiar | Adventure in Dalhousie, Chamba" />
+        <meta name="twitter:description" content="Join us for an unforgettable hot air balloon ride in Khajjiar, Dalhousie!" />
+        <meta name="twitter:image" content="/images/hotairballon.jpg" />
+
+        {/* JSON-LD Schema Markup for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TouristAttraction",
+              "name": "Hot Air Ballooning in Khajjiar",
+              "image": "/images/hotairballon.jpg",
+              "description": "Experience breathtaking hot air balloon rides over Khajjiar, Dalhousie. Book your adventure today.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Khajjiar",
+                "addressRegion": "Himachal Pradesh",
+                "addressCountry": "IN"
+              },
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "INR",
+                "price": "2500",
+                "availability": "https://schema.org/InStock",
+                "url": "https://yourwebsite.com/hot-air-ballooning"
+              }
+            })
+          }}
+        />
+      </Head> 
+  {!isHomePage && <Header />}
+   
+      <h1 className="text-5xl text-white font-bold text-center font-serif p-5  mb-8">Hot Air Balloons</h1>  
       {/* Grid Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
         <div className="md:row-span-2 relative group overflow-hidden rounded-lg shadow-md">
@@ -104,9 +166,13 @@ export default function HotAirBallooning() {
         </div>
 
         {/* Call to Action Button */}
-        <button className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 transition-all">
-          Start Your Explore
-        </button>
+        <button
+  className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 transition-all"
+  onClick={() => window.open("https://wa.me/9817404544?text=Hello%2C%20I%20am%20interested%20in%20your%20services", "_blank")}
+>
+  Start Your Explore
+</button>
+
       </motion.div>
 
       {/* Right Section - Image with Floating User Reviews */}
@@ -118,7 +184,7 @@ export default function HotAirBallooning() {
       >
         <div className="relative rounded-lg overflow-hidden shadow-lg">
           <Image 
-            src="/images/travel-image.jpg"
+            src="/images/hotairballon2.jpg"
             alt="Beautiful Travel Destination"
             width={500}
             height={600}
@@ -133,12 +199,13 @@ export default function HotAirBallooning() {
  
 
       {/* Call to Action */}
-      <motion.button 
-        className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg transition-transform transform hover:scale-105"
-        whileHover={{ scale: 1.1 }}
-      >
-        Book Your Adventure Now 🚀
-      </motion.button>
+      <motion.button
+      className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg transition-transform transform hover:scale-105"
+      whileHover={{ scale: 1.1 }}
+      onClick={() => window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")}
+    >
+      Book Your Adventure Now
+    </motion.button>
     </motion.div>
       
       </div>
